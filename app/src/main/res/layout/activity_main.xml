@@ -7,11 +7,18 @@
     android:orientation="vertical"
     tools:context="com.example.pepi.busmanagmentsystem.MainActivity">
 
-    <ListView
-        android:id="@+id/listRoute"
+
+    <fragment
+        android:id="@+id/search_fragment"
+        android:name="com.example.pepi.busmanagmentsystem.Fragments.SearchFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="3"/>
 
-    </ListView>
-
+    <fragment
+        android:id="@+id/list_route_fragment"
+        android:name="com.example.pepi.busmanagmentsystem.Fragments.ListRouteFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"/>
 </LinearLayout>
