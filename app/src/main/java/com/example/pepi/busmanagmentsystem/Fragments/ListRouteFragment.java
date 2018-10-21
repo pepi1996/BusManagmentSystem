@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.example.pepi.busmanagmentsystem.Adapters.RouteAdapter;
 import com.example.pepi.busmanagmentsystem.Models.CityItem;
 import com.example.pepi.busmanagmentsystem.Models.RouteItem;
 import com.example.pepi.busmanagmentsystem.R;
@@ -70,12 +71,13 @@ public class ListRouteFragment extends ListFragment {
                     int id=item.getInt("id");
                     String from=item.getString("from");
                     String to=item.getString("to");
+                    String time=item.getString("time");
+                    String company=item.getString("company");
 
-                    routes.add(new RouteItem(id,from,to));
+                    routes.add(new RouteItem(id,from,to,time,company));
                 }
 
-                ArrayAdapter<RouteItem> adapter=new ArrayAdapter<RouteItem>(getContext(),
-                        android.R.layout.simple_list_item_1,routes);
+                RouteAdapter adapter=new RouteAdapter(getActivity(),routes);
 
                 setListAdapter(adapter);
 

@@ -9,11 +9,15 @@ public class RouteItem {
     private int id;
     private String from;
     private String to;
+    private String time;
+    private String company;
 
-    public RouteItem(int id, String from, String to) {
+    public RouteItem(int id, String from, String to,String time,String company) {
         this.id = id;
         this.from = from;
         this.to = to;
+        this.time=time;
+        this.company=company;
     }
 
     public int getId() {
@@ -40,8 +44,24 @@ public class RouteItem {
         this.to = to;
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
     @Override
     public String toString() {
-       return from+" - "+to;
+       return from+" - "+to+" - "+time;
     }
 }
