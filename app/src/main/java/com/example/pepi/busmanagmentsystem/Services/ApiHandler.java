@@ -16,23 +16,27 @@ import java.net.URL;
 public class ApiHandler {
 
 
-    public String getJsonString(String urlAddress)
-    {
+    public String getJsonString(String urlAddress) throws IOException {
         URL url;
-        HttpURLConnection urlConnection;
+        HttpURLConnection urlConnection = null;
+        InputStream inputStream=null;
         String result="";
 
         try {
             url=new URL(urlAddress);
             urlConnection= (HttpURLConnection) url.openConnection();
 
-            InputStream inputStream=new BufferedInputStream(urlConnection.getInputStream());
+            inputStream=new BufferedInputStream(urlConnection.getInputStream());
             result= convertToString(inputStream);
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        finally {
+            inputStream.close();
+            urlConnection.disconnect();
         }
 
         return result;

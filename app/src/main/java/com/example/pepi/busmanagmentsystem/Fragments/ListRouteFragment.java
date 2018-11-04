@@ -1,16 +1,16 @@
 package com.example.pepi.busmanagmentsystem.Fragments;
 
-import android.app.Fragment;
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.pepi.busmanagmentsystem.Adapters.RouteAdapter;
-import com.example.pepi.busmanagmentsystem.Models.CityItem;
+import com.example.pepi.busmanagmentsystem.MapsActivity;
 import com.example.pepi.busmanagmentsystem.Models.RouteItem;
 import com.example.pepi.busmanagmentsystem.R;
 import com.example.pepi.busmanagmentsystem.Services.ApiHandler;
@@ -19,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,15 @@ public class ListRouteFragment extends ListFragment {
         return view;
     }
 
-    public void fillListWithItems(int fromId,int toId)
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+
+        Intent intent=new Intent(getActivity(), MapsActivity.class);
+
+        startActivity(intent);
+    }
+
+    public void fillListWithItems(int fromId, int toId)
     {
         new RouteAPI().execute("http://192.168.0.111:8000/getRoutes/"+fromId+"/"+toId);
     }
@@ -51,7 +60,13 @@ public class ListRouteFragment extends ListFragment {
 
             ApiHandler apiHandler=new ApiHandler();
 
-            String result=apiHandler.getJsonString(url);
+            String result= null;
+
+            try {
+                result = apiHandler.getJsonString(url);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             return result;
         }

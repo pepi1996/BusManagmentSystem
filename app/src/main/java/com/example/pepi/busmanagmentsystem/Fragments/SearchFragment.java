@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,7 +97,13 @@ public class SearchFragment extends Fragment implements AdapterView.OnItemSelect
 
             ApiHandler apiHandler=new ApiHandler();
 
-            String result=apiHandler.getJsonString(url);
+            String result= null;
+            try {
+                result = apiHandler.getJsonString(url);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             return result;
         }
